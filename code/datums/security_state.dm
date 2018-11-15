@@ -121,7 +121,7 @@
 		previous_security_level.switching_down_from()
 		new_security_level.switching_down_to()
 
-	log_and_message_admins("has changed the security level from [previous_security_level.name] to [new_security_level.name].")
+	log_and_message_admins("has changed the protocol level from [previous_security_level.name] to [new_security_level.name].")
 	return TRUE
 
 // This proc decreases the current security level, if possible
@@ -178,12 +178,12 @@
 
 /decl/security_level/default/switching_up_to()
 	if(up_description)
-		security_announcement_up.Announce(up_description, "Attention! Alert level elevated to [name]!")
+		security_announcement_up.Announce(up_description, "Attention! [name] Initiated.")
 	notify_station()
 
 /decl/security_level/default/switching_down_to()
 	if(down_description)
-		security_announcement_down.Announce(down_description, "Attention! Alert level changed to [name]!")
+		security_announcement_down.Announce(down_description, "Attention! [name] Initiated.")
 	notify_station()
 
 /decl/security_level/default/proc/notify_station()
@@ -193,7 +193,7 @@
 	post_status("alert")
 
 /decl/security_level/default/code_green
-	name = "code green"
+	name = "Daybreak protocol"
 
 	light_max_bright = 0.25
 	light_inner_range = 0.1
@@ -205,10 +205,10 @@
 	overlay_alarm = "alarm_green"
 	overlay_status_display = "status_display_green"
 
-	down_description = "All threats to the station have passed. Security may not have weapons visible, privacy laws are once again fully enforced."
+	down_description = "Daybreak protocol assigned, No immediate threats detected, crew may carry out regular work."
 
 /decl/security_level/default/code_blue
-	name = "code blue"
+	name = "Sunset protocol"
 
 	light_max_bright = 0.5
 	light_inner_range = 0.1
@@ -219,11 +219,11 @@
 	overlay_alarm = "alarm_blue"
 	overlay_status_display = "status_display_blue"
 
-	up_description = "The station has received reliable information about possible hostile activity on the station. Security staff may have weapons visible, random searches are permitted."
-	down_description = "The immediate threat has passed. Security may no longer have weapons drawn at all times, but may continue to have them visible. Random searches are still allowed."
+	up_description = "Sunset protocol initiated, Possible or minimal threat detected, Any and all suspicious activity should be reported to security, crew may carry out regular work with maximum sensors activated, Extra vehicular activity is prohibited."
+	down_description = "The immediate threat has passed. De-elevated protocol."
 
 /decl/security_level/default/code_red
-	name = "code red"
+	name = "Nightfall protocol"
 
 	light_max_bright = 0.5
 	light_inner_range = 0.1
@@ -234,11 +234,11 @@
 	overlay_alarm = "alarm_red"
 	overlay_status_display = "status_display_red"
 
-	up_description = "There is an immediate serious threat to the station. Security may have weapons unholstered at all times. Random searches are allowed and advised."
-	down_description = "The self-destruct mechanism has been deactivated, there is still however an immediate serious threat to the station. Security may have weapons unholstered at all times, random searches are allowed and advised."
+	up_description = "Nightfall protocol initiated, immediate threat confirmed, crew rights have been limited, all personnel are to be secluded to their respective departments, failure to comply will result in jail sentence and immediate relief of duty, this is not a drill."
+	down_description = "The immediate threat has passed. De-elevated protocol."
 
 /decl/security_level/default/code_delta
-	name = "code delta"
+	name = "Eclipse protocol"
 
 	light_max_bright = 0.75
 	light_inner_range = 0.1
@@ -252,5 +252,5 @@
 	var/static/datum/announcement/priority/security/security_announcement_delta = new(do_log = 0, do_newscast = 1, new_sound = sound('sound/effects/siren.ogg'))
 
 /decl/security_level/default/code_delta/switching_up_to()
-	security_announcement_delta.Announce("The self-destruct mechanism has been engaged. All crew are instructed to obey all instructions given by heads of staff. Any violations of these orders can be punished by death. This is not a drill.", "Attention! Delta security level reached!")
+	security_announcement_delta.Announce("Eclipse protocol initiated, extreme threat or major insurrection confirmed, martial law is in effect, crew rights and liberties have been **nullified**, Station leadership transferred to SOL officials, failure to comply to SOL troopers will result in immediate execution. **THIS** is not a drill.")
 	notify_station()
